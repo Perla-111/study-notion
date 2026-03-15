@@ -2,7 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import fileUpload from "express-fileupload";
 
+import { cloudinaryConnect } from "./config/cloudinary.js";
 import { connectDB } from "./config/database.js";
 
 import userRoutes from "./routes/user.js";
@@ -16,6 +18,8 @@ dotenv.config();
 const PORT = process.env.PORT;
 const app = express();
 
+connectDB();
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -25,7 +29,15 @@ app.use(
   }),
 );
 
-connectDB();
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  }),
+);
+
+// Connecting to cloudinary
+cloudinaryConnect();
 
 // Setting up routes
 app.use("/api/v1/auth", userRoutes);
