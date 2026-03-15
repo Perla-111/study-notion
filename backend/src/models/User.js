@@ -1,52 +1,53 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    firstName: {
-        type: String,
-        required: true,
-        trim: true,
+  firstName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  accountType: {
+    type: String,
+    enum: ["Admin", "Student", "Instructor"],
+    default: "Student",
+    required: true,
+  },
+  additionalDetails: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Profile",
+    required: true,
+  },
+  courses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Course",
     },
-    lastName: {
-        type: String,
-        required: true,
-        trim: true,
+  ],
+  image: {
+    type: String,
+    required: true,
+  },
+  courseProgress: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CourseProgress",
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    accountType: {
-        type: String,
-        enum: ['Admin', 'Student', 'Instructor'],
-        default: 'Student',
-        required: true,
-    },
-    additionalDetails: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Profile',
-        required: true,
-    },
-    courses: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Course',
-        },
-    ],
-    image: {
-        type: String,
-        required: true,
-    },
-    courseProgress: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'CourseProgress',
-        },
-    ],
-})
+  ],
+});
 
-export default User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+export default User;

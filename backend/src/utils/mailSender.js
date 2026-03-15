@@ -1,4 +1,7 @@
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const mailSender = async (email, title, body) => {
   try {
@@ -9,20 +12,20 @@ const mailSender = async (email, title, body) => {
         pass: process.env.MAIL_PASS,
       },
       secure: false,
-    })
+    });
 
     let info = await transporter.sendMail({
       from: `"Studynotion | CodeHelp" <${process.env.MAIL_USER}>`, // sender address
       to: `${email}`, // list of receivers
       subject: `${title}`, // Subject line
       html: `${body}`, // html body
-    })
-    console.log(info.response)
-    return info
+    });
+    console.log(info.response);
+    return info;
   } catch (error) {
-    console.log(error.message)
-    return error.message
+    console.log(error.message);
+    return error.message;
   }
-}
+};
 
 export default mailSender;

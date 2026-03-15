@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 
 const SubSectionSchema = new mongoose.Schema({
-	title: { type: String },
-	timeDuration: { type: String },
-	description: { type: String },
-	videoUrl: { type: String },
+  title: { type: String },
+  timeDuration: { type: String },
+  description: { type: String },
+  videoUrl: { type: String },
 });
 
-export default SubSection = mongoose.model("SubSection", SubSectionSchema);
+const SubSection = mongoose.model("SubSection", SubSectionSchema);
+export default SubSection;
