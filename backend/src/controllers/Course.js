@@ -142,7 +142,10 @@ export const createCourse = async (req, res) => {
 export const editCourse = async (req, res) => {
   try {
     const { courseId } = req.body;
-    const updates = req.body;
+    // .hasOwnProperty not working as req.body is of null prototype object
+    // so used spread operator
+    const updates = { ...req.body };
+
     const course = await Course.findById(courseId);
 
     if (!course) {

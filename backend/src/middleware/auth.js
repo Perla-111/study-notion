@@ -15,9 +15,9 @@ export const auth = async (req, res, next) => {
     // Extracting JWT from request cookies, body or header
     const token =
       req.cookies.token ||
-      req.body.token ||
-      req.header("Authorization").replace("Bearer ", "");
-
+      // .body not working as not present
+      // req.body.token ||
+      req.header("Authorization")?.replace("Bearer ", "");
     // If JWT is missing, return 401 Unauthorized response
     if (!token) {
       return res.status(401).json({ success: false, message: `Token Missing` });
@@ -87,8 +87,6 @@ export const isInstructor = async (req, res, next) => {
   try {
     const userDetails = await User.findOne({ email: req.user.email });
     console.log(userDetails);
-
-    console.log(userDetails.accountType);
 
     if (userDetails.accountType !== "Instructor") {
       return res.status(401).json({
