@@ -43,10 +43,10 @@ import {
   getAverageRating,
   getAllRatingReview,
 } from "../controllers/ratingandReview.js";
-// import {
-//   updateCourseProgress,
-//   getProgressPercentage,
-// } from "../controllers/courseProgress.js";
+import {
+  updateCourseProgress,
+  // getProgressPercentage,
+} from "../controllers/courseProgress.js";
 // Importing Middlewares
 import { auth, isInstructor, isStudent, isAdmin } from "../middleware/auth.js";
 
@@ -81,7 +81,7 @@ router.post("/getCourseDetails", getCourseDetails);
 // Get Details for a Specific Courses
 router.post("/getFullCourseDetails", auth, getFullCourseDetails);
 // To Update Course Progress
-// router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress);
+router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress);
 // To get Course Progress
 // router.post("/getProgressPercentage", auth, isStudent, getProgressPercentage)
 // Delete a Course
