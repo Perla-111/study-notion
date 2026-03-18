@@ -1,4 +1,4 @@
-import { updateCompletedLectures } from "../../slices/viewCourseSlice";
+// import { updateCompletedLectures } from "../../slices/viewCourseSlice";
 // import { setLoading } from "../../slices/profileSlice";
 import { apiConnector } from "../apiConnector";
 import { courseEndpoints } from "../apis";
