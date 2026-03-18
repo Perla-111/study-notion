@@ -15,19 +15,45 @@ import contactUsRoute from "./routes/contact.js";
 
 dotenv.config();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001;
 const app = express();
 
-connectDB();
+const allowedOrigins = new Set([
+  "https://study-notion-eta-one.vercel.app",
+  "http://localhost:3000",
+]);
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Allow non-browser clients (no Origin header).
+    // Some proxies/misconfigured clients send literal "undefined"/"null".
+    if (!origin || origin === "undefined" || origin === "null") {
+      return callback(null, true);
+    }
+
+    // Allow exact matches
+    if (allowedOrigins.has(origin)) return callback(null, true);
+
+    // Allow Vercel preview deployments for this app
+    // e.g. https://study-notion-eta-one-git-branch-username.vercel.app
+    if (/^https:\/\/study-notion-eta-one-.*\.vercel\.app$/.test(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`CORS blocked origin: ${origin}`));
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+// Ensure preflight requests are answered for all routes
+app.options(/.*/, cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: "*",
-    credentials: false,
-  }),
-);
 
 app.use(
   fileUpload({
@@ -35,9 +61,6 @@ app.use(
     tempFileDir: "/tmp/",
   }),
 );
-
-// Connecting to cloudinary
-cloudinaryConnect();
 
 // Setting up routes
 app.use("/api/v1/auth", userRoutes);
@@ -50,6 +73,10 @@ app.get("/", (req, res) => {
   res.send("study notion application is running");
 });
 
-app.listen(PORT, () => {
-  // console.log(`server is running on port ${PORT}`);
+connectDB().then(() => {
+  // Connecting to cloudinary
+  cloudinaryConnect();
+  app.listen(PORT, () => {
+    console.log("Server started on PORT:", PORT);
+  });
 });
