@@ -26,7 +26,7 @@ export const auth = async (req, res, next) => {
     try {
       // Verifying the JWT using the secret key stored in environment variables
       const decode = await jwt.verify(token, process.env.JWT_SECRET);
-      console.log(decode);
+      //console.log(decode);
       // Storing the decoded JWT payload in the request object for further use
       req.user = decode;
     } catch (error) {
@@ -86,7 +86,7 @@ export const isAdmin = async (req, res, next) => {
 export const isInstructor = async (req, res, next) => {
   try {
     const userDetails = await User.findOne({ email: req.user.email });
-    console.log(userDetails);
+    //console.log(userDetails);
 
     if (userDetails.accountType !== "Instructor") {
       return res.status(401).json({

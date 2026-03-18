@@ -54,7 +54,7 @@ export const updateProfile = async (req, res) => {
       updatedUserDetails,
     });
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     return res.status(500).json({
       success: false,
       error: error.message,
@@ -65,7 +65,7 @@ export const updateProfile = async (req, res) => {
 export const deleteAccount = async (req, res) => {
   try {
     const id = req.user.id;
-    console.log(id);
+    //console.log(id);
     const user = await User.findById({ _id: id });
     if (!user) {
       return res.status(404).json({
@@ -92,7 +92,7 @@ export const deleteAccount = async (req, res) => {
     });
     await CourseProgress.deleteMany({ userId: id });
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     res
       .status(500)
       .json({ success: false, message: "User Cannot be deleted successfully" });
@@ -105,7 +105,7 @@ export const getAllUserDetails = async (req, res) => {
     const userDetails = await User.findById(id)
       .populate("additionalDetails")
       .exec();
-    console.log(userDetails);
+    //console.log(userDetails);
     res.status(200).json({
       success: true,
       message: "User Data fetched successfully",
@@ -129,7 +129,7 @@ export const updateDisplayPicture = async (req, res) => {
       1000,
       1000,
     );
-    console.log(image);
+    //console.log(image);
     const updatedProfile = await User.findByIdAndUpdate(
       { _id: userId },
       { image: image.secure_url },
