@@ -2,7 +2,7 @@
 
 A web application that allows users to explore a wide range of software development courses, view detailed content, and purchase them online. The platform helps learners upskill through structured, on-demand programming and development tutorials.
 
-## ✨ Technologies
+## 🛠 Tech Stack used
 
 - `React`
 - `Javascript`
@@ -19,8 +19,7 @@ It provides features like ,
 - see ratings and reviews of courses
  
 ## 📍 The Process
-
-I've been trying to upskill myself from frontend to full stack development and tried multiple times to learn but was never consistent in doing the handson consistently but this time i am pushing myself to be on track on this full stack journey and this is the one of the many projects of this journey.
+- I've been trying to upskill myself from frontend to full stack development and tried multiple times to learn but was never consistent in doing the handson consistently but this time i am pushing myself to be on track on this full stack journey and this is the one of the many projects of this journey to get handsons in authentication, middlewares, otp verifications, email sending, asset uploads, mongodb.
 
 ## 🚦 Running the Project
 
