@@ -1,12 +1,10 @@
-import React from "react";
-import { FooterLink2 } from "../../data/footer-links";
-import { Link } from "react-router-dom";
-
 // Images
 import Logo from "../../assets/Logo/Logo-Full-Light.png";
-
+import { FooterLink2 } from "../../data/footer-links";
+import React from "react";
 // Icons
 import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const BottomFooter = ["Privacy Policy", "Cookie Policy", "Terms"];
 const Resources = [
@@ -41,7 +39,16 @@ const Footer = () => {
                       key={i}
                       className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
                     >
-                      <Link to={ele.toLowerCase()}>{ele}</Link>
+                      <Link
+                        replace={true}
+                        to={
+                          ele === "About"
+                            ? `/${ele.toLowerCase()}`
+                            : window.location.pathname
+                        }
+                      >
+                        {ele}
+                      </Link>
                     </div>
                   );
                 })}
@@ -67,7 +74,10 @@ const Footer = () => {
                       key={index}
                       className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
                     >
-                      <Link to={ele.split(" ").join("-").toLowerCase()}>
+                      <Link
+                        // to={ele.split(" ").join("-").toLowerCase()}
+                        to={window.location.pathname}
+                      >
                         {ele}
                       </Link>
                     </div>
@@ -79,7 +89,12 @@ const Footer = () => {
                 Support
               </h1>
               <div className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200 mt-2">
-                <Link to={"/help-center"}>Help Center</Link>
+                <Link
+                  //  to={"/help-center"}
+                  to={window.location.pathname}
+                >
+                  Help Center
+                </Link>
               </div>
             </div>
 
@@ -95,7 +110,10 @@ const Footer = () => {
                       key={index}
                       className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
                     >
-                      <Link to={ele.split(" ").join("-").toLowerCase()}>
+                      <Link
+                        // to={ele.split(" ").join("-").toLowerCase()}
+                        to={window.location.pathname}
+                      >
                         {ele}
                       </Link>
                     </div>
@@ -113,7 +131,10 @@ const Footer = () => {
                       key={index}
                       className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
                     >
-                      <Link to={ele.split(" ").join("-").toLowerCase()}>
+                      <Link
+                        // to={ele.split(" ").join("-").toLowerCase()}
+                        to={window.location.pathname}
+                      >
                         {ele}
                       </Link>
                     </div>
@@ -138,7 +159,12 @@ const Footer = () => {
                           key={index}
                           className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
                         >
-                          <Link to={link.link}>{link.title}</Link>
+                          <Link
+                            // to={link.link}
+                            to={window.location.pathname}
+                          >
+                            {link.title}
+                          </Link>
                         </div>
                       );
                     })}
@@ -164,7 +190,10 @@ const Footer = () => {
                       : "border-r border-richblack-700 cursor-pointer hover:text-richblack-50 transition-all duration-200"
                   } px-3 `}
                 >
-                  <Link to={ele.split(" ").join("-").toLocaleLowerCase()}>
+                  <Link
+                    // to={ele.split(" ").join("-").toLocaleLowerCase()
+                    to={window.location.pathname}
+                  >
                     {ele}
                   </Link>
                 </div>
@@ -172,7 +201,9 @@ const Footer = () => {
             })}
           </div>
 
-          <div className="text-center">Made with ❤️ CodeHelp © 2023 Studynotion</div>
+          <div className="text-center">
+            Made with ❤️ CodeHelp x Kalyan © 2026 StudyNotion
+          </div>
         </div>
       </div>
     </div>
